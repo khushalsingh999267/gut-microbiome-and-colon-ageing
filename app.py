@@ -6,11 +6,11 @@ app = Flask(__name__)
 # Route for the main report page
 @app.route('/')
 def index():
-    # Read the report content to display it in the app
-    report_path = 'REPORT.md'
+    # Read the README content to display it in the app
+    readme_path = 'README.md'
     report_content = ""
-    if os.path.exists(report_path):
-        with open(report_path, 'r') as f:
+    if os.path.exists(readme_path):
+        with open(readme_path, 'r') as f:
             report_content = f.read()
     
     # List of figures to display

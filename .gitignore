@@ -2,5 +2,6 @@
 __pycache__/
 *.log
 .ipynb_checkpoints/
-results/
 data/processed/
+results/*
+!results/figures/

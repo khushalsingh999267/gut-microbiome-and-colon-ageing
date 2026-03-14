@@ -1,84 +1,79 @@
-# 🧬 BLOCK-O-MICS: The Microbiome-Ageing Axis in the Colon
+# Gut Microbiome and Colon Ageing: A Transcriptomic Study (GSE278548)
 
-Welcome to the **BLOCK-O-MICS** project. This repository contains a professional-grade bioinformatics pipeline designed to explore a fundamental question: **Does the gut microbiome have a greater impact on our colon health than the process of getting older?**
+This repository contains a professional-grade bioinformatics pipeline designed to investigate the relative impact of microbial colonization and biological ageing on the colon's transcriptomic landscape.
 
-Using advanced RNA-sequencing (RNA-seq) analysis on the **GSE278548** dataset, we provide a detailed transcriptomic map of how the presence of bacteria (Conventional) vs. their absence (Germ-Free) reshapes the biological landscape of the colon across different age groups.
-
----
-
-## 🎯 1. The Goal
-The primary objective of this study is to identify the **transcriptomic "signatures"** of microbial colonization. We aim to:
-1.  Quantify the difference in gene expression between mice with a healthy microbiome and those raised in sterile environments.
-2.  Determine if age-related changes are overshadowed by the powerful influence of gut bacteria.
-3.  Identify specific metabolic pathways that "shut down" when the microbiome is missing.
+Using RNA-sequencing (RNA-seq) analysis on the **GSE278548** dataset, we provide a detailed map of how the presence of bacteria (Conventional) versus their absence (Germ-Free) reshapes the biological processes of the colon across different age groups.
 
 ---
 
-## 🧪 2. Methodology (How we did it)
-We built a modular, reproducible pipeline using the "Unix Philosophy" of specialized tools:
+## Project Overview
 
-*   **Data Acquisition**: Automatically fetched raw count matrices from **NCBI GEO** using `Biopython` and `Requests`.
-*   **Normalization**: Processed raw data into **Counts Per Million (CPM)** to ensure samples with different sequencing depths are directly comparable.
-*   **Statistical Modeling**: Employed **PyDESeq2** (the industry gold-standard) to calculate "Fold Change" (how much a gene increases or decreases) and "P-values" (the statistical certainty of that change).
-*   **Pathway Enrichment**: Used **GSEA (Gene Set Enrichment Analysis)** to move from individual genes to big-picture biological processes like metabolism and inflammation.
-*   **Orchestration**: Managed the entire workflow with **Snakemake** to ensure 100% reproducibility.
+The primary objective of this study is to identify the **transcriptomic signatures** of microbial colonization. Key research questions include:
+1.  **Microbial Impact:** How does the presence of a healthy microbiome alter gene expression compared to sterile (Germ-Free) environments?
+2.  **Ageing vs. Microbiome:** Does biological ageing or microbial status have a more profound effect on the colon's molecular profile?
+3.  **Metabolic Regulation:** Which specific metabolic pathways are regulated by the gut microbiome?
 
 ---
 
-## 📊 3. Results & Interpretation
-Below is the step-by-step biological story revealed by our data.
+## Pipeline & Methodology
 
-### Plot 1: Technical Validation (Library Size)
-Before looking at biology, we must ensure our data is high quality. This plot shows that every sample was sequenced to a consistent depth, regardless of whether the mouse was Young, Old, Conventional, or Germ-Free.
+The analysis is implemented as a modular and reproducible pipeline:
+
+*   **Data Acquisition:** Automated retrieval of raw count matrices from NCBI GEO.
+*   **Normalization:** Conversion of raw counts to **Counts Per Million (CPM)** for cross-sample comparability.
+*   **Differential Expression Analysis:** Utilizing **PyDESeq2** to calculate Fold Change and statistical significance (P-values).
+*   **Pathway Enrichment:** Conducting **GSEA (Gene Set Enrichment Analysis)** to identify biological processes, such as Butanoate metabolism and inflammatory responses.
+*   **Workflow Orchestration:** Managed by **Snakemake** to ensure reproducibility and scalability.
+
+---
+
+## Results & Biological Insights
+
+### 1. Technical Quality Control
+Library size analysis confirms consistent sequencing depth across all experimental groups (Young, Old, Conventional, and Germ-Free), ensuring that biological comparisons are not biased by technical variation.
 ![Library Size](results/figures/01_qc_library_size.png)
 
-### Plot 2: Global Discovery (The "Big Picture")
-We used **PCoA (Principal Coordinate Analysis)** to see how samples cluster. Notice how PC1 (the X-axis) perfectly separates mice based on their microbiome status. 
-*   **Interpretation**: The microbiome is the single most powerful factor in this study—more influential than the age of the mouse.
+### 2. Global Transcriptomic Variance (PCoA)
+Principal Coordinate Analysis (PCoA) reveals that microbial status (Conventional vs. Germ-Free) is the dominant driver of transcriptomic variation, accounting for significantly more variance than biological age.
 ![PCoA Discovery](results/figures/02_pcoa_discovery.png)
 
-### Plot 3: Mechanistic Drivers (The "Biomarkers")
-The **Volcano Plot** identifies which specific genes changed. We have labeled the most significant genes by their symbols (e.g., *Reg3b*, *Reg3g*). 
-*   **Interpretation**: These genes are "switched on" by bacteria to protect the gut lining and manage the immune system.
+### 3. Differential Gene Expression
+Volcano plots highlight key biomarkers of microbial colonization, including antimicrobial peptides like *Reg3b* and *Reg3g*, which are upregulated in the presence of bacteria.
 ![Volcano Plot](results/figures/03_volcano_mechanisms.png)
 
-### Plot 4: Functional Interpretation (Pathways)
-Instead of looking at 20,000 individual genes, we look at pathways. 
-*   **Interpretation**: **Butanoate (Butyrate) Metabolism** is the most enriched pathway. Butyrate is the primary energy source for colon cells. Without a microbiome, the colon effectively enters a state of metabolic starvation.
+### 4. Functional Pathway Enrichment
+GSEA identifies **Butanoate (Butyrate) Metabolism** as a highly enriched pathway. As butyrate is the primary energy source for colonocytes, its absence in Germ-Free mice suggests a state of metabolic deprivation.
 ![Pathway Enrichment](results/figures/04_pathway_interpretation.png)
 
-### Plot 5: Group Boundary Analysis
-This plot emphasizes the **95% Confidence Ellipses** for our groups. 
-*   **Interpretation**: There is zero overlap between Conventional and Germ-Free clusters, confirming that these are two distinct biological "states." The gut is fundamentally reprogrammed by its inhabitants.
+### 5. Group Cluster Boundaries
+95% confidence ellipses demonstrate distinct biological states between Conventional and Germ-Free mice, with no overlap, confirming the fundamental reprogramming of the colon by the microbiome.
 ![Group Boundaries](results/figures/05_pcoa_boundaries.png)
 
 ---
 
-## 💡 4. Conclusion
-Our study concludes that the **gut microbiome is the primary programmer of colon health.** 
+## Conclusion
 
-1.  **Microbiome > Age**: The presence of bacteria causes a much larger shift in gene expression than the natural ageing process.
-2.  **Metabolic Fuel**: The most critical function of the microbiome is providing the "fuel" (Butanoate) for the colon to function.
-3.  **Strategy**: To combat age-related gut decline, we should focus on restoring microbial metabolic pathways (like Butyrate production) through probiotics or precision nutrition.
+This study demonstrates that the **gut microbiome is a primary determinant of colon health**, often overshadowing the effects of chronological ageing. The findings emphasize the importance of microbial-derived metabolites, particularly butyrate, in maintaining colonic homeostasis and suggest that targeting microbial pathways may be a viable strategy for mitigating age-related gut decline.
 
 ---
 
-## 🚀 5. How to Run this Project
+## Getting Started
 
-### Install Dependencies
+### Prerequisites
+Install the required Python packages:
 ```bash
 pip install biopython streamlit plotly pandas requests pyyaml snakemake scikit-bio pydeseq2 adjustText
 ```
 
-### Run the Pipeline
-```bash
-python3 main.py
-```
-
-### Launch the Interactive Dashboard
-```bash
-streamlit run streamlit_app.py
-```
+### Usage
+1.  **Execute the Analysis Pipeline:**
+    ```bash
+    python3 main.py
+    ```
+2.  **Launch the Interactive Dashboard:**
+    ```bash
+    streamlit run streamlit_app.py
+    ```
 
 ---
-*Developed with 🧬 by Gemini CLI.*
+*Project maintained by Khushal Singh.*
