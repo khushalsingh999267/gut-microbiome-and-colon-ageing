@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLOCK-O-MICS | UNIX Bio-Terminal</title>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Animated Biological Background -->
+    <div id="bokeh-bg"></div>
+
+    <div class="terminal-container">
+        <header class="terminal-header">
+            <div class="controls">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+            </div>
+            <div class="title">bio-user@linux:~/rna-seq-analysis</div>
+        </header>
+
+        <main class="terminal-body">
+            <section class="intro">
+                <h1 class="glitch">BLOCK-O-MICS v2.0</h1>
+                <p class="system-msg">[SYSTEM] ACCESS GRANTED. LOADING BIOLOGICAL DATA...</p>
+            </section>
+
+            <section class="report-section">
+                <h2>$ cat PROJECT_REPORT.md</h2>
+                <div class="markdown-body">
+                    <pre>{{ report }}</pre>
+                </div>
+            </section>
+
+            <section class="visuals-section">
+                <h2>$ ls ./results/figures/</h2>
+                <div class="grid-container">
+                    {% for fig in figures %}
+                    <div class="figure-card">
+                        <h3>{{ fig.title }}</h3>
+                        <div class="img-wrapper">
+                            <img src="{{ url_for('static', filename=fig.path) }}" alt="{{ fig.title }}">
+                        </div>
+                        <p class="fig-desc">{{ fig.desc }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <footer class="terminal-footer">
+                <p class="blink">_</p>
+                <p>BLOCK-O-MICS ENGINE • KERNEL: 5.15.0-GENERIC • DATA: GSE278548</p>
+            </footer>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/animation.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+study_id: "GSE278548"
+normalization_method: "CPM"
+filtering_threshold: 10
+n_hvgs: 2000
+alpha: 0.05
+lfc_threshold: 1.0
+pathway_db: "KEGG_2019_Human"

@@ -1,0 +1,28 @@
+name: rna_seq_bio
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python=3.10
+  - pandas
+  - numpy
+  - scipy
+  - matplotlib
+  - seaborn
+  - scikit-learn
+  - scikit-bio
+  - scanpy
+  - anndata
+  - pydeseq2
+  - gseapy
+  - rpy2
+  - pyyaml
+  - requests
+  - statsmodels
+  - plotnine
+  - jupyterlab
+  - ipympl
+  - pip
+  - pip:
+    - recount3
